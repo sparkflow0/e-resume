@@ -44,11 +44,13 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onAnalysisComplete
             const { analyzeResume } = await import('../services/ai-service');
 
             // Get API Key & Model
-            const apiKey = localStorage.getItem('openai_api_key');
-            const model = localStorage.getItem('openai_model') || 'gpt-4o';
+            // Use Environment Variable or fallback to internal/user var if valid (Vite requires VITE_ prefix)
+            const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+            const model = 'gpt-4o'; // Hardcoded for now as part of removal request
 
             if (!apiKey) {
-                alert("⚠ Please enter your OpenAI API Key in the bottom-left corner settings 🤖");
+                console.error("Missing API Key in environment variables.");
+                alert("Server Config Error: Missing OpenAI API Key. Please notify the administrator.");
                 setIsAnalyzing(false);
                 return;
             }
@@ -74,7 +76,9 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onAnalysisComplete
     };
 
     return (
-        <div className={`upload-container ${isAnalyzing ? 'analyzing' : ''}`}>
+        <div className={`upload-container ${isAnalyzing ? 'analyzing' : ''}`} style={{ position: 'relative' }}>
+
+
             {!isAnalyzing ? (
                 <div
                     className={`drop-zone ${isDragging ? 'dragging' : ''}`}
