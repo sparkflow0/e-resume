@@ -3,7 +3,6 @@ import { UploadSection } from './components/UploadSection';
 import { PersonaView, PersonaData } from './components/PersonaView';
 import { PersonaEditor } from './components/PersonaEditor';
 import { ShareButton } from './components/ShareButton'; // New Import
-import { ApiKeyInput } from './components/ApiKeyInput';
 import { AuthProvider, useAuth } from './services/auth-context';
 import { savePersona, getPersona } from './services/db-service';
 
