@@ -1,0 +1,116 @@
+.upload-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 4rem auto;
+    perspective: 1000px;
+}
+
+.drop-zone {
+    background: var(--color-bg-card);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.drop-zone:hover,
+.drop-zone.dragging {
+    background: var(--color-bg-card-hover);
+    border-color: var(--color-accent-primary);
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(112, 0, 255, 0.15);
+}
+
+.drop-zone h3 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+}
+
+.drop-zone p {
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.file-types {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.icon-cloud {
+    font-size: 4rem;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+/* AI Analysis State */
+.analysis-view {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    border: var(--glass-border);
+    backdrop-filter: blur(20px);
+}
+
+.ai-loader {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    position: relative;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent, var(--color-accent-primary), var(--color-accent-secondary));
+    animation: spin 1.5s linear infinite;
+}
+
+.ai-loader::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.scanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-main);
+    border-radius: 50%;
+    filter: blur(10px);
+    opacity: 0.8;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,88 @@
+:root {
+  --font-main: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+  /* Color Palette - Premium Dark */
+  --color-bg-mesh: #0a0a0a;
+  --color-bg-card: rgba(255, 255, 255, 0.05);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #ededed;
+  --color-text-secondary: #a1a1a1;
+  --color-accent-primary: #7000ff;
+  --color-accent-secondary: #00c3ff;
+  
+  --gradient-main: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --backdrop-blur: blur(10px);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-bg-mesh);
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0, 195, 255, 0.15) 0%, transparent 40%);
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+button {
+  border-radius: 8px;
+  border: var(--glass-border);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all 0.25s;
+  backdrop-filter: var(--backdrop-blur);
+}
+
+button:hover {
+  background-color: var(--color-bg-card-hover);
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 15px rgba(112, 0, 255, 0.3);
+}
+
+.card {
+  background: var(--color-bg-card);
+  border: var(--glass-border);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
