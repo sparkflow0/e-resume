@@ -203,7 +203,7 @@ export const PersonaView: React.FC<PersonaViewProps> = ({ data, onEdit }) => {
             />
 
             <footer className="persona-footer">
-                <p>Powered by Rusme</p>
+                <p>Powered by E-Resume</p>
             </footer>
         </div>
     );
