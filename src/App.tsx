@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { UploadSection } from './components/UploadSection';
 import { PersonaView, PersonaData } from './components/PersonaView';
 import { PersonaEditor } from './components/PersonaEditor';

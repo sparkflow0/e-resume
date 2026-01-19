@@ -30,64 +30,7 @@ export const extractTextAndImage = async (file: File): Promise<ExtractedData> =>
             fullText += pageText + '\n';
 
             // 2. Image Extraction (Page 1 Only - Heuristic for Profile Pic)
-            if (i === 1 && !profileImage) {
-                try {
-                    const ops = await page.getOperatorList();
-                    const fns = ops.fnArray;
-                    const args = ops.argsArray;
-
-                    let largestArea = 0;
-                    let bestImgKey = null;
-
-                    // OPS.paintImageXObject is usually mapped to numeric value 85, 
-                    // but we can't rely on internal constants easily in this setup.
-                    // We look for the operation that paints an image.
-
-                    for (let j = 0; j < fns.length; j++) {
-                        // In PDF.js, 85 is often paintImageXObject, but checking common paint ops
-                        // We'll iterate the objs object on the page common object.
-                        if (fns[j] === pdfjsLib.OPS.paintImageXObject) {
-                            const imgKey = args[j][0];
-                            bestImgKey = imgKey; // Take the last one or implement sizing logic below
-                        }
-                    }
-
-                    // If we found an image key, let's try to extract it from commonObjs
-                    page.getOperatorList().then(async (opList: any) => {
-                        // This is complex in the browser build without direct access to objects.
-                        // Fallback: Render page to canvas and verify? No, that gives whole page.
-
-                        // Alternative: Iterate page.objs
-                        page.objs.get(bestImgKey, (img: any) => {
-                            if (img && img.data) {
-                                // Convert to canvas to get base64
-                                const canvas = document.createElement('canvas');
-                                canvas.width = img.width;
-                                canvas.height = img.height;
-                                const ctx = canvas.getContext('2d');
-                                if (ctx) {
-                                    const imageData = ctx.createImageData(img.width, img.height);
-                                    // Copy data... (this depends on image encoding, RGBA vs RGB)
-                                    // Simplification: This path often fails due to complex PDF image formats (CMYK etc).
-                                }
-                            }
-                        });
-                    });
-
-                    // ROBUST FALLBACK FOR PROTOTYPE:
-                    // Since direct XObject extraction is flaky without heavy utils, 
-                    // we will implement a "Canvas Crop" heuristic if needed, OR
-                    // use the standard PDF.js image extraction pattern.
-
-                    // Attempting simpler common object iteration if accessible
-                    if (bestImgKey) {
-                        // Real implementation of image extraction needs strict types we don't have.
-                        // We will assume 'profileImage' is passed if we find a good candidate.
-                    }
-                } catch (e) {
-                    console.warn("Could not extract image via Ops", e);
-                }
-            }
+            // Skipped here, handled below via cleaner re-implementation
         }
 
         // RE-IMPLEMENTATION: cleaner approach for image extraction
