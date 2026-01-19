@@ -31,66 +31,78 @@ export const ApiKeyInput = () => {
     };
 
     return (
-        <div style={{
-            position: 'fixed',
-            bottom: '1rem',
-            left: '1rem',
-            zIndex: 1000,
-            background: 'var(--color-surface)',
-            padding: '0.5rem',
-            borderRadius: '8px',
-            border: '1px solid var(--color-border)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            fontSize: '0.8rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5rem'
-        }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span
-                    onClick={() => setIsVisible(!isVisible)}
-                    style={{ cursor: 'pointer', opacity: 0.7, fontSize: '1.2rem' }}
-                    title="Click to toggle OpenAI Settings"
-                >
-                    🤖
-                </span>
+        <div style={{ position: 'relative' }}>
+            <button
+                onClick={() => setIsVisible(!isVisible)}
+                style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontSize: '1.2rem',
+                    padding: '0.5rem',
+                    borderRadius: '50%',
+                    transition: 'background 0.2s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+                title="AI Settings"
+            >
+                🤖
+            </button>
 
-                {isVisible && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        <input
-                            type="password"
-                            placeholder="Paste OpenAI API Key"
-                            value={key}
-                            onChange={(e) => handleSaveKey(e.target.value)}
-                            style={{
-                                background: 'var(--color-bg)',
-                                border: '1px solid var(--color-border)',
-                                color: 'var(--color-text)',
-                                padding: '0.25rem',
-                                borderRadius: '4px',
-                                width: '200px'
-                            }}
-                        />
+            {isVisible && (
+                <div style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    marginTop: '0.5rem',
+                    zIndex: 1000,
+                    background: 'var(--color-surface)',
+                    padding: '1rem',
+                    borderRadius: '8px',
+                    border: '1px solid var(--color-border)',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.8rem',
+                    minWidth: '220px'
+                }}>
+                    <input
+                        type="password"
+                        placeholder="Paste OpenAI API Key"
+                        value={key}
+                        onChange={(e) => handleSaveKey(e.target.value)}
+                        style={{
+                            background: 'var(--color-bg)',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            padding: '0.5rem',
+                            borderRadius: '4px',
+                            width: '100%',
+                            boxSizing: 'border-box'
+                        }}
+                    />
 
-                        <select
-                            value={model}
-                            onChange={(e) => handleSaveModel(e.target.value)}
-                            style={{
-                                background: 'var(--color-bg)',
-                                border: '1px solid var(--color-border)',
-                                color: 'var(--color-text)',
-                                padding: '0.25rem',
-                                borderRadius: '4px',
-                                width: '200px'
-                            }}
-                        >
-                            {MODELS.map(m => (
-                                <option key={m.value} value={m.value}>{m.label}</option>
-                            ))}
-                        </select>
-                    </div>
-                )}
-            </div>
+                    <select
+                        value={model}
+                        onChange={(e) => handleSaveModel(e.target.value)}
+                        style={{
+                            background: 'var(--color-bg)',
+                            border: '1px solid var(--color-border)',
+                            color: 'var(--color-text)',
+                            padding: '0.5rem',
+                            borderRadius: '4px',
+                            width: '100%',
+                            boxSizing: 'border-box'
+                        }}
+                    >
+                        {MODELS.map(m => (
+                            <option key={m.value} value={m.value}>{m.label}</option>
+                        ))}
+                    </select>
+                </div>
+            )}
         </div>
     );
 };

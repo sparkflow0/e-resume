@@ -99,6 +99,7 @@ const AppContent = () => {
                 </div>
 
                 <div className="auth-buttons" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <ApiKeyInput />
                     {persona && !isEditing && (
                         <button
                             onClick={() => {
@@ -132,7 +133,6 @@ const AppContent = () => {
             </header>
 
             <main>
-                <ApiKeyInput />
                 {!persona ? (
                     <UploadSection onAnalysisComplete={handleAnalysisComplete} />
                 ) : isEditing ? (
