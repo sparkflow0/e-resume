@@ -199,6 +199,7 @@ export const PersonaView: React.FC<PersonaViewProps> = ({ data, onEdit }) => {
             <PortfolioGrid
                 items={portfolioItems}
                 onAddClick={onEdit}
+                readOnly={!onEdit}
             />
 
             <footer className="persona-footer">
